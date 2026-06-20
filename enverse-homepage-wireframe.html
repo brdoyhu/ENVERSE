@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ENVERSE 独立站首页线框图</title>
+  <style>
+    :root {
+      --ink: #1f2328;
+      --muted: #667085;
+      --line: #b8c0cc;
+      --soft-line: #d9dee7;
+      --paper: #f7f4ee;
+      --panel: #ffffff;
+      --accent: #b9965b;
+      --fire: #b84a3a;
+      --metal: #8d8f8a;
+      --wood: #5f7d62;
+      --water: #416e7f;
+      --earth: #c89a3b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+
+    .page-title {
+      padding: 24px 0 18px;
+    }
+
+    .page-title h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 48px);
+      letter-spacing: 0;
+    }
+
+    .page-title p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .wire-section {
+      margin: 18px 0;
+      border: 2px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--soft-line);
+      background: #fbfaf7;
+      color: var(--muted);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .section-body {
+      padding: 22px;
+    }
+
+    .announcement {
+      text-align: center;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .header-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr auto;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .logo-box {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav span,
+    .tools span {
+      border: 1px dashed var(--line);
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: #fff;
+    }
+
+    .tools {
+      display: flex;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero {
+      min-height: 440px;
+      display: grid;
+      place-items: center;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(18,18,18,.08), rgba(185,150,91,.12)),
+        repeating-linear-gradient(45deg, transparent 0, transparent 14px, rgba(31,35,40,.04) 14px, rgba(31,35,40,.04) 16px);
+      text-align: center;
+      padding: 28px;
+    }
+
+    .hero-inner {
+      width: min(720px, 100%);
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.82);
+    }
+
+    .hero h2 {
+      margin: 0 0 12px;
+      font-size: clamp(34px, 5vw, 68px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      margin: 0 auto 22px;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      min-width: 160px;
+      border: 1px solid var(--ink);
+      border-radius: 6px;
+      padding: 12px 18px;
+      background: #fff;
+      font-weight: 700;
+    }
+
+    .button.primary {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .section-heading {
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 6px;
+      font-size: clamp(24px, 3vw, 38px);
+    }
+
+    .section-heading p {
+      margin: 0 auto;
+      max-width: 680px;
+      color: var(--muted);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      min-height: 138px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .card .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .fire { color: var(--fire); }
+    .metal { color: var(--metal); }
+    .wood { color: var(--wood); }
+    .water { color: var(--water); }
+    .earth { color: var(--earth); }
+
+    .product-card {
+      display: grid;
+      grid-template-rows: 150px auto;
+      gap: 12px;
+      min-height: 310px;
+    }
+
+    .image-placeholder {
+      display: grid;
+      place-items: center;
+      border: 1px dashed var(--line);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      background: #fbfaf7;
+      text-align: center;
+      padding: 12px;
+    }
+
+    .product-card h3 {
+      font-size: 16px;
+    }
+
+    .price {
+      margin-top: 12px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .mini-button {
+      display: block;
+      width: 100%;
+      margin-top: 12px;
+      border: 1px solid var(--ink);
+      border-radius: 6px;
+      padding: 10px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      background: #fff;
+    }
+
+    .three-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .step-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: #fff;
+      min-height: 130px;
+    }
+
+    .arrow {
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 24px;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .story-copy {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      background: #fff;
+    }
+
+    .story-copy h2 {
+      margin-top: 0;
+      font-size: clamp(26px, 3vw, 42px);
+    }
+
+    .story-copy p {
+      color: var(--muted);
+    }
+
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .included-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+      background: #fff;
+    }
+
+    .icon-box {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 10px;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      background: #fbfaf7;
+    }
+
+    .cta {
+      text-align: center;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 32px 20px;
+      background: #fbfaf7;
+    }
+
+    .journal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .article-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fff;
+      min-height: 180px;
+    }
+
+    .article-card .thumb {
+      height: 72px;
+      margin-bottom: 14px;
+      border: 1px dashed var(--line);
+      border-radius: 6px;
+      background: #fbfaf7;
+    }
+
+    .newsletter-form {
+      display: grid;
+      grid-template-columns: 1fr 180px;
+      gap: 12px;
+      width: min(680px, 100%);
+      margin: 22px auto 0;
+    }
+
+    .input-placeholder {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 13px 14px;
+      color: var(--muted);
+      background: #fff;
+      text-align: left;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .footer-col {
+      min-height: 150px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .footer-col h3 {
+      margin-top: 0;
+      font-size: 16px;
+    }
+
+    .footer-col p {
+      margin: 6px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .header-grid,
+      .story {
+        grid-template-columns: 1fr;
+      }
+
+      .card-grid,
+      .included-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .three-grid,
+      .journal-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .step-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .arrow {
+        transform: rotate(90deg);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 20px, 1180px);
+      }
+
+      .section-body {
+        padding: 14px;
+      }
+
+      .card-grid,
+      .included-grid,
+      .newsletter-form {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 380px;
+        padding: 14px;
+      }
+
+      .hero-inner {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="page-title">
+      <h1>ENVERSE 独立站首页线框图</h1>
+      <p>用于 Shopify 首页搭建的结构布局。当前版本不使用图片，只用线框展示各板块、内容层级和移动端响应关系。</p>
+    </div>
+
+    <section class="wire-section">
+      <div class="section-label"><span>Announcement Bar</span><span>全站顶部公告</span></div>
+      <div class="section-body announcement">Free shipping over $75 | 7-Day Ritual Guide included with every bracelet</div>
+    </section>
+
+    <header class="wire-section">
+      <div class="section-label"><span>Header</span><span>导航与购物入口</span></div>
+      <div class="section-body header-grid">
+        <div class="logo-box">ENVERSE</div>
+        <nav class="nav" aria-label="Main navigation">
+          <span>Shop</span>
+          <span>Elements</span>
+          <span>Intentions</span>
+          <span>The Ritual</span>
+          <span>Journal</span>
+        </nav>
+        <div class="tools">
+          <span>Search</span>
+          <span>Account</span>
+          <span>Cart</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="wire-section">
+      <div class="section-label"><span>Hero Section</span><span>首屏核心转化</span></div>
+      <div class="section-body">
+        <div class="hero">
+          <div class="hero-inner">
+            <h2>Wear Your Element. Align Your Energy.</h2>
+            <p>Five Element crystal bracelets designed for daily intention, balance, and modern ritual.</p>
+            <div class="button-row">
+              <div class="button primary">Shop by Element</div>
+              <div class="button">Take the Element Quiz</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wire-section">
+      <div class="section-label"><span>Shop by Element</span><span>五行选择入口</span></div>
+      <div class="section-body">
+        <div class="section-heading">
+          <h2>Choose Your Element</h2>
+          <p>Each bracelet is designed around one elemental force and one daily intention.</p>
+        </div>
+        <div class="card-grid">
+          <article class="card fire">
+            <span class="tag">Fire</span>
+            <h3>Confidence</h3>
+            <p>Intuition, visibility, magnetic social energy.</p>
+          </article>
+          <article class="card metal">
+            <span class="tag">Metal</span>
+            <h3>Clarity</h3>
+            <p>Protection, emotional balance, peaceful boundaries.</p>
+          </article>
+          <article class="card wood">
+            <span class="tag">Wood</span>
+            <h3>Growth</h3>
+            <p>Career momentum, opportunity, new beginnings.</p>
+          </article>
+          <article class="card water">
+            <span class="tag">Water</span>
+            <h3>Calm</h3>
+            <p>Communication, intuition, energetic flow.</p>
+          </article>
+          <article class="card earth">
+            <span class="tag">Earth</span>
+            <h3>Abundance</h3>
+            <p>Grounding, stability, long-term success.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="wire-section">
+      <div class="section-label"><span>Product Section</span><span>五款首发产品</span></div>
+      <div class="section-body">
+        <div class="section-heading">
+          <h2>Start with Your Element</h2>
+          <p>Choose the bracelet that reflects the energy you want to carry.</p>
+        </div>
+        <div class="card-grid">
+          <article class="card product-card">
+            <div class="image-placeholder">Product image<br>Fire</div>
+            <div>
+              <h3>Fire Wisdom Crystal Ritual Bracelet</h3>
+              <p>Confidence, intuition, visibility.</p>
+              <div class="price">$56</div>
+              <div class="mini-button">Add to Cart</div>
+            </div>
+          </article>
+          <article class="card product-card">
+            <div class="image-placeholder">Product image<br>Metal</div>
+            <div>
+              <h3>Metal Purity Crystal Ritual Bracelet</h3>
+              <p>Clarity, protection, balance.</p>
+              <div class="price">$62</div>
+              <div class="mini-button">Add to Cart</div>
+            </div>
+          </article>
+          <article class="card product-card">
+            <div class="image-placeholder">Product image<br>Wood</div>
+            <div>
+              <h3>Wood Growth Crystal Ritual Bracelet</h3>
+              <p>Growth, career, opportunity.</p>
+              <div class="price">$58</div>
+              <div class="mini-button">Add to Cart</div>
+            </div>
+          </article>
+          <article class="card product-card">
+            <div class="image-placeholder">Product image<br>Water</div>
+            <div>
+              <h3>Water Flow Crystal Ritual Bracelet</h3>
+              <p>Calm, communication, flow.</p>
+              <div class="price">$64</div>
+              <div class="mini-button">Add to Cart</div>
+            </div>
+          </article>
+          <article class="card product-card">
+            <div class="image-placeholder">Product image<br>Earth</div>
+            <div>
+              <h3>Earth Abundance Crystal Ritual Bracelet</h3>
+              <p>Abundance, grounding, stability.</p>
+              <div class="price">$68</div>
+              <div class="mini-button">Add to Cart</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="wire-section">
+      <div class="section-label"><span>Why ENVERSE</span><span>品牌信任模块</span></div>
+      <div class="section-body">
+        <div class="three-grid">
+          <article class="card">
+            <h3>Five Element Wisdom</h3>
+            <p>Inspired by the Eastern philosophy of Fire, Metal, Wood, Water, and Earth.</p>
+          </article>
+          <article class="card">
+            <h3>Natural Crystal Energy</h3>
+            <p>Each bracelet combines selected stones with symbolic meaning and elemental color.</p>
+          </article>
+          <article class="card">
+            <h3>Daily Ritual Ready</h3>
+            <p>Every order includes a 7-Day Ritual Guide and a Five Element Meaning Card.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="wire-section">
+      <div class="section-label"><span>How It Works</span><span>使用流程</span></div>
+      <div class="section-body">
+        <div class="section-heading">
+          <h2>How to Begin Your Ritual</h2>
+        </div>
+        <div class="step-grid">
+          <div class="step">
+            <h3>1. Choose</h3>
+            <p>Select the element that reflects what your energy needs now.</p>
+          </div>
+          <div class="arrow">→</div>
+          <div class="step">
+            <h3>2. Wear</h3>
+            <p>Use it as a physical reminder of your chosen intention.</p>
+          </div>
+          <div class="arrow">→</div>
+          <div class="step">
+            <h3>3. Follow</h3>
+            <p>Build a simple daily practice with your 7-Day Ritual Guide.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wire-section">
+      <div class="section-label"><span>Brand Story</span><span>品牌故事承接</span></div>
+      <div class="section-body story">
+        <div class="story-copy">
+          <h2>A Universe You Can Wear</h2>
+          <p>ENVERSE transforms the wisdom of the Five Elements into crystal bracelets for modern self-care, intention, and inner alignment.</p>
+          <p>Each piece is designed as a daily ritual object - a quiet reminder to return to your chosen energy.</p>
+          <div class="button primary">Read Our Story</div>
+        </div>
+        <div class="image-placeholder">Brand atmosphere / material detail area</div>
+      </div>
+    </section>
+
+    <section class="wire-section">
+      <div class="section-label"><span>What's Included</span><span>包装与赠品</span></div>
+      <div class="section-body">
+        <div class="included-grid">
+          <div class="included-item">
+            <div class="icon-box"></div>
+            <strong>Bracelet</strong>
+          </div>
+          <div class="included-item">
+            <div class="icon-box"></div>
+            <strong>ENVERSE Pouch</strong>
+          </div>
+          <div class="included-item">
+            <div class="icon-box"></div>
+            <strong>7-Day Guide</strong>
+          </div>
+          <div class="included-item">
+            <div class="icon-box"></div>
+            <strong>Element Card</strong>
+          </div>
+          <div class="included-item">
+            <div class="icon-box"></div>
+            <strong>Gift Box</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wire-section">
+      <div class="section-label"><span>Element Quiz CTA</span><span>推荐测试</span></div>
+      <div class="section-body">
+        <div class="cta">
+          <h2>Which Element Do You Need Right Now?</h2>
+          <p>Answer a few questions and find the bracelet that matches your current intention.</p>
+          <div class="button primary">Take the Quiz</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wire-section">
+      <div class="section-label"><span>Journal / SEO</span><span>内容承接</span></div>
+      <div class="section-body">
+        <div class="section-heading">
+          <h2>The Element Guide</h2>
+        </div>
+        <div class="journal-grid">
+          <article class="article-card">
+            <div class="thumb"></div>
+            <h3>What Are the Five Elements?</h3>
+            <p>Educational article card.</p>
+          </article>
+          <article class="article-card">
+            <div class="thumb"></div>
+            <h3>How to Choose Your Bracelet</h3>
+            <p>Guide article card.</p>
+          </article>
+          <article class="article-card">
+            <div class="thumb"></div>
+            <h3>What Is a Crystal Ritual?</h3>
+            <p>Ritual article card.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="wire-section">
+      <div class="section-label"><span>Newsletter</span><span>邮件订阅</span></div>
+      <div class="section-body">
+        <div class="cta">
+          <h2>Find Your Element</h2>
+          <p>Subscribe and receive 10% off your first ENVERSE ritual bracelet.</p>
+          <div class="newsletter-form">
+            <div class="input-placeholder">Email address</div>
+            <div class="button primary">Subscribe</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="wire-section">
+      <div class="section-label"><span>Footer</span><span>页脚信息</span></div>
+      <div class="section-body">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3>About ENVERSE</h3>
+            <p>Our Story</p>
+            <p>Contact</p>
+            <p>FAQ</p>
+          </div>
+          <div class="footer-col">
+            <h3>Shop</h3>
+            <p>Elements</p>
+            <p>RITUAL Collection</p>
+            <p>Gift Sets</p>
+          </div>
+          <div class="footer-col">
+            <h3>Support</h3>
+            <p>Shipping</p>
+            <p>Returns</p>
+            <p>Privacy Policy</p>
+          </div>
+          <div class="footer-col">
+            <h3>Social</h3>
+            <p>Instagram</p>
+            <p>TikTok</p>
+            <p>Pinterest</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
